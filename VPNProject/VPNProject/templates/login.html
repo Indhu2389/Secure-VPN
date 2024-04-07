@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url("{% static 'backg.jpg' %}"); /* Use relative path to your image */
+            background-size: cover;
+            font-family: Arial, sans-serif; /* Set your desired font family */
+            color: #ffffff; /* Set text color */					
+	    padding-top:60px
+
+        }
+        .container {
+
+            max-width: 500px; /* Set the maximum width of the container */
+            margin: 0 auto; /* Center the container horizontally */
+	    padding: 40px;
+            background-color: rgba(0, 0, 0, 0.5); /* Add semi-transparent background */
+            border-radius: 10px; /* Add border radius for rounded corners */
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px; /* Set font size for headings */
+            margin-bottom: 20px;
+        }
+        label {
+            display: block; /* Display labels in block format */
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%; /* Set input fields and button to full width */
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        input[type="submit"] {
+            background-color: #007bff; /* Set button background color */
+            color: #ffffff; /* Set button text color */
+            cursor: pointer; /* Add pointer cursor on hover */
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker background color on hover */
+        }
+        .message {
+            margin-bottom: 20px;
+            color: #ff0000; /* Set error message color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">  
+        <h2>Welcome to University of windsor VPN</h2>
+	{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    	{% endif %}	
+	<!-- Add welcome message -->
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Login">
+        </form>
+        <br>
+      <p>Don't have an account?  <a  href="{% url 'register' %}">Sign Up</a></p>
+      <p><a class="forgot-password" href="{% url 'forget_password' %}">Forgot Password?</a></p>	
+    </div>
+</body>
+</html>

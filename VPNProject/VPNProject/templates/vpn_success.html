@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Connection Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+	    background: url("{% static 'success.jpg' %}") center / cover no-repeat; /* Adjusted for better fit */
+            padding: 50px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        /* Slider Button Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VPN Connection Successful</h1>
+        <p>Please proceed with ping from client.</p>
+        <!-- Slider Button for Disconnecting VPN -->
+        <label class="switch">
+            <input type="checkbox" id="disconnectToggle" checked>
+            <span class="slider"></span>
+        </label>
+        <!-- Text to indicate VPN Connection -->
+        <p id="connectionText">VPN Connected</p>
+    </div>
+
+    <script>
+        // JavaScript to toggle text and redirect when slider button is clicked
+        document.getElementById('disconnectToggle').addEventListener('change', function() {
+            var connectionText = document.getElementById('connectionText');
+            if (this.checked) {
+                connectionText.innerText = 'VPN Connected';
+            } else {
+                connectionText.innerText = 'VPN Disconnected';
+                // Redirect to login page when VPN is disconnected
+                window.location.href = "{% url 'login_page' %}";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        {% if message %}
+        <p class="message">{{ message }}</p>
+        {% endif %}
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <label for="password_confirm">Confirm Password:</label>
+            <input type="password" id="password_confirm" name="password_confirm" required><br>
+            <input type="submit" value="Register">
+        </form>
+        <br>
+        <a href="{% url 'login_page' %}">Go back to login page</a>
+    </div>
+</body>
+</html>
